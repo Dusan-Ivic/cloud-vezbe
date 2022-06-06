@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentService_WebRole", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentService_Data", "StudentService_Data\StudentService_Data.csproj", "{45166414-6287-4F6D-A88B-03878106944A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageConverter_WorkerRole", "ImageConverter_WorkerRole\ImageConverter_WorkerRole.csproj", "{D182E6E4-9458-4B7E-9893-29FE64AA9272}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{45166414-6287-4F6D-A88B-03878106944A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45166414-6287-4F6D-A88B-03878106944A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45166414-6287-4F6D-A88B-03878106944A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D182E6E4-9458-4B7E-9893-29FE64AA9272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D182E6E4-9458-4B7E-9893-29FE64AA9272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D182E6E4-9458-4B7E-9893-29FE64AA9272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D182E6E4-9458-4B7E-9893-29FE64AA9272}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

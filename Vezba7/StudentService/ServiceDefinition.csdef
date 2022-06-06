@@ -16,4 +16,10 @@
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />
     </Endpoints>
   </WebRole>
+  <WorkerRole name="ImageConverter_WorkerRole" vmsize="Standard_D1_v2">
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
+      <Setting name="DataConnectionString" />
+    </ConfigurationSettings>
+  </WorkerRole>
 </ServiceDefinition>

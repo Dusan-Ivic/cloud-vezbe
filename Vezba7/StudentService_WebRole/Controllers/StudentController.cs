@@ -1,9 +1,11 @@
 ﻿using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage.Queue;
 using StudentService_Data;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,16 +32,17 @@ namespace StudentService_WebRole.Controllers
         {
             try
             {
-                // kreiranje blob sadrzaja i kreiranje blob klijenta
-                string uniqueBlobName = string.Format("image_{0}", RowKey);
-                var storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("DataConnectionString"));
-                CloudBlobClient blobStorage = storageAccount.CreateCloudBlobClient();
-                CloudBlobContainer container = blobStorage.GetContainerReference("vezba");
-                CloudBlockBlob blob = container.GetBlockBlobReference(uniqueBlobName);
+                if (repo.Exists(RowKey))
+                {
+                    ViewBag.Message = "Student sa unetim indeksom vec postoji!";
+                    return View();
+                }
+
+                BlobHelper blobHelper = new BlobHelper();
+                CloudBlockBlob blob = blobHelper.GetBlockBlobReference("vezba", $"image_{RowKey}");
                 blob.Properties.ContentType = file.ContentType;
-                // postavljanje odabrane datoteke (slike) u blob servis koristeci blob klijent
-                blob.UploadFromStream(file.InputStream);
-                // upis studenta u table storage koristeci StudentDataRepository klasu
+                blobHelper.UploadImage(new Bitmap(file.InputStream), blob);
+
                 Student entry = new Student(RowKey)
                 {
                     Name = Name,
@@ -48,6 +51,10 @@ namespace StudentService_WebRole.Controllers
                     ThumbnailUrl = blob.Uri.ToString()
                 };
                 repo.AddStudent(entry);
+
+                CloudQueue queue = QueueHelper.GetQueueReference("vezba");
+                queue.AddMessage(new CloudQueueMessage(RowKey));
+
                 return RedirectToAction("Index");
             }
             catch

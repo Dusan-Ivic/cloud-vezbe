@@ -37,6 +37,14 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ImageConverter_WorkerRole\ImageConverter_WorkerRole.csproj">
+      <Name>ImageConverter_WorkerRole</Name>
+      <Project>{d182e6e4-9458-4b7e-9893-29fe64aa9272}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>ImageConverter_WorkerRole</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
     <ProjectReference Include="..\StudentService_WebRole\StudentService_WebRole.csproj">
       <Name>StudentService_WebRole</Name>
       <Project>{9a087c08-ea95-49b0-999a-8ea544f59ea6}</Project>
@@ -47,9 +55,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ImageConverter_WorkerRoleContent\" />
     <Folder Include="StudentService_WebRoleContent\" />
   </ItemGroup>
   <ItemGroup>
+    <DiagnosticsConfiguration Include="ImageConverter_WorkerRoleContent\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="StudentService_WebRoleContent\diagnostics.wadcfgx" />
   </ItemGroup>
   <!-- Import the target files for this project template -->

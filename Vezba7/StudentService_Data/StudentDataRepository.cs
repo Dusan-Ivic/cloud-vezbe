@@ -32,10 +32,34 @@ namespace StudentService_Data
             return results;
         }
 
+        public Student GetStudent(string rowKey)
+        {
+            var results = from g in _table.CreateQuery<Student>()
+                          where (g.PartitionKey == "Student" && g.RowKey == rowKey)
+                          select g;
+
+            return results.FirstOrDefault();
+        }
+
+        public void UpdateStudent(Student student)
+        {
+            TableOperation replaceOperation = TableOperation.Replace(student);
+            _table.Execute(replaceOperation);
+        }
+
         public void AddStudent(Student newStudent)
         {
             TableOperation insertOperation = TableOperation.Insert(newStudent);
             _table.Execute(insertOperation);
+        }
+
+        public bool Exists(string rowKey)
+        {
+            var results = from g in _table.CreateQuery<Student>()
+                          where (g.PartitionKey == "Student" && g.RowKey == rowKey)
+                          select g;
+
+            return results.ToList().Count > 0;
         }
     }
 }
