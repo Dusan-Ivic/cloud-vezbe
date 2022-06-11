@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SwitchService_Data.Switch>
+@{
+    ViewBag.Title = "History";
+}
+
+<h2>History</h2>
+
+<table border="1" cellpadding="3">
+    <tr>
+        <th>Name</th>
+        <th>State</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Add New Switch", "Index")
+</p>
