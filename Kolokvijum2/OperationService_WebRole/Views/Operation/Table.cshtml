@@ -1,0 +1,31 @@
+﻿@model IEnumerable<OperationService_Data.Operation>
+@{
+    ViewBag.Title = "Table";
+    int totalSum = 0;
+}
+
+<h2>Tabela svih entiteta:</h2>
+
+<table border="1" cellpadding="1">
+    <tr>
+        <th>Operand 1</th>
+        <th>Operand 2</th>
+        <th>Operator</th>
+        <th>Rezultat</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Operand1</td>
+            <td>@item.Operand2</td>
+            <td>@item.Operator</td>
+            <td>@item.Result</td>
+        </tr>
+        totalSum += item.Result;
+    }
+</table>
+
+<h3>Ukupna suma je: @totalSum</h3>
+
+@Html.ActionLink("Povratak", "Index")
